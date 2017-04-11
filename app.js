@@ -1,12 +1,25 @@
 'use strict';
 
 var SwaggerExpress = require('swagger-express-mw');
-var app = require('express')();
+var express = require('express');
+var app = express();
+var path = require('path');
 module.exports = app; // for testing
 
 var config = {
   appRoot: __dirname // required config
 };
+
+app.use(express.static('api-docs'));
+
+app.get('/swagger.yaml', function(req, res) {
+  res.setHeader('Content-Type', 'text/x-yaml');
+  res.sendFile(path.join(__dirname, "./api/swagger/swagger.yaml"));
+});
+
+app.get('/api', function(req, res) {
+  res.sendFile(path.join(__dirname, "./api-docs/index.html"));
+});
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }

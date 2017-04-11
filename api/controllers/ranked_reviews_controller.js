@@ -22,7 +22,7 @@ function paginate_reviews(reviews, page_number, page_size) {
     page_number = maxPages;
   }
   const starting_index = Math.max(page_number - 1, 0) * page_size; 
-  return reviews.slice( starting_index, starting_index + page_size + 1);
+  return reviews.slice( starting_index, starting_index + page_size);
 }
 
 function get_reviews(req, res) {
@@ -41,7 +41,6 @@ function get_reviews(req, res) {
   console.log(`Got a request: From Date = ${from_date}. To Date = ${to_date}. Page Number = ${page_number}. Page Size = ${page_size}`);
 
   const searchResult = search_reviews(product_id, from_date, to_date);
-  console.log(searchResult);
   const response = paginate_reviews(searchResult, page_number, page_size || searchResult.length);
 
   res.json({ reviews: response });
