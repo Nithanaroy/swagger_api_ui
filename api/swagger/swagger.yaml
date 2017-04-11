@@ -1,0 +1,97 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Ranked Customer Reviews
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /ranked-reviews/product/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: ranked_reviews_controller
+    get:
+      description: Returns reviews of a product ranked and paginated
+      # used as the method name of the controller
+      operationId: get_reviews
+      parameters:
+        - name: id
+          in: path
+          description: Product ID for which reviews are required
+          required: true
+          type: string
+        - name: since
+          in: query
+          description: Filters the reviews after this date (YYYY-MM-DD)
+          required: false
+          type: string
+        - name: pageNumber
+          in: query
+          description: Pagination support. Page to return
+          required: false
+          type: number
+        - name: pageSize
+          in: query
+          description: Pagination support. Number of records per page to return
+          required: false
+          type: number
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/RankedReviewsResponse"
+        "400":
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "500":
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  RankedReviewsResponse:
+    required:
+      - reviews
+    properties:
+      reviews:
+        type: array
+        items: 
+          type: object
+          properties:
+            id:
+              type: string
+            product_id:
+              type: string
+            review:
+              type: string
+            date:
+              type: string
+            rating:
+              type: number
+            user_id:
+              type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string

@@ -1,0 +1,50 @@
+[
+	{
+		"id": "1",
+		"review": "",
+		"date": "2017-Apr-9",
+		"user_id": "Alpha",
+		"rating": 4.5,
+		"product_id": "10"
+	},
+	{
+		"id": "2",
+		"review": "",
+		"date": "2017-Apr-1",
+		"user_id": "Beta",
+		"rating": 4,
+		"product_id": "10"
+	},
+	{
+		"id": "3",
+		"review": "",
+		"date": "2017-Mar-30",
+		"user_id": "Gamma",
+		"rating": 3.5,
+		"product_id": "12"
+	},
+	{
+		"id": "4",
+		"review": "",
+		"date": "2017-Mar-15",
+		"user_id": "Alpha",
+		"rating": 4.5,
+		"product_id": "10"
+	},
+	{
+		"id": "5",
+		"review": "",
+		"date": "2017-Mar-21",
+		"user_id": "Alpha",
+		"rating": 4.5,
+		"product_id": "10"
+	},
+	{
+		"id": "6",
+		"review": "",
+		"date": "2017-Mar-23",
+		"user_id": "Beta",
+		"rating": 5,
+		"product_id": "12"
+	}
+]
